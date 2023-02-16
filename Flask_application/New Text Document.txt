@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="flex justify-center flex-col items-center h-screen">
+        <h1 class="font-sans font-bold text-3xl text-pink-900">Pneumonia Detection from Chest X-ray Images Using Transfer Learning by Fusing the Features of Pre-trained Xception and VGG16 Networks</h1>
+        <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+            <div class='w-2/4 mt-4 bg-slate-700 p-2 rounded-lg shadow-lg border-opacity-40 border-4 border-black flex flex-col justify-center items-center'>
+                <div class="mt-5">
+                    <input class="ml-20 text-white flex items-center justify-center" type="file" id="file" name="image" onchange="displayImage(event)">
+                </div>
+
+              <button class='text-white flex mt-4 w-3/5 cursor-pointer justify-center items-center p-2 bg-green-700  border-2 border-blue-900 border-opacity-80 text-xl font-medium rounded-lg ' onclick="displayOutput()">
+  Predict
+</button>
+            </div>
+        </form>
+        <div class="pt-5 flex justify-center items-center">
+            <img class="object-fill h-60 w-50 src="" alt="" id="showImg">
+        </div>
+        <div id="output_string">
+            <p>{{output_string}}</p>
+        </div>
+    </div>
+
+<script>
+  function displayImage(event) {
+    //document.setelementbyId("output_string","None");
+    let img = document.getElementById("showImg");
+    img.src = URL.createObjectURL(event.target.files[0]);
+
+    localStorage.setItem("displayedImage", img.src);
+
+    //let outputString = document.getElementById("output_string");
+    //if (outputString.style.display === "block") {
+      outputString.style.display = "none";
+    //}
+
+}
+
+  function displayOutput() {
+    document.getElementById("output_string").style.display = "block";
+  }
+
+  window.addEventListener("load", function() {
+    let img = document.getElementById("showImg");
+    let storedImage = localStorage.getItem("displayedImage");
+    if (storedImage) {
+      img.src = storedImage;
+    }
+    //document.getElementById("output_string").style.display = "none";
+  });
+</script>
+
+
+</body>
+
+</html>

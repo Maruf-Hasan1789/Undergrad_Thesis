@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="flex justify-center flex-col items-center h-screen">
+        <h1 class=" font-sans font-bold text-3xl text-pink-900">Chest disease detection</h1>
+        <div
+            class='w-2/4  mt-4 bg-slate-700 p-2 rounded-lg shadow-lg border-opacity-40 border-4 border-black flex flex-col justify-center items-center'>
+            <div class="mt-5">
+                <input class="ml-20 text-white flex items-center justify-center" type="file" id="file" name="myfile" onchange="displayImage(event)">
+            </div>
+
+            
+
+            <div class="mt-8">
+                <label class="text-white" for="disease">select</label>
+                <select name="disease" id="disease">
+                    <option value="dis1">dis1</option>
+                    <option value="dis2">dis2</option>
+                </select>
+
+            </div>
+
+            <button
+                class=' text-white flex mt-4 w-3/5 cursor-pointer justify-center items-center p-2 bg-green-700  border-2 border-blue-900 border-opacity-80 text-xl font-medium rounded-lg '>
+                Predict
+            </button>
+
+        </div>
+
+        <div class="pt-5 flex justify-center items-center">
+            <img class="object-fill h-60 w-50 src="" alt="" id="showImg" >
+        </div>
+
+        
+    </div>
+		<div>
+        {% if output_string %}
+          <p hidden> The patient is diagnosed with {{ output_string }}</p>
+        {% endif %}
+		</div>
+
+    
+
+
+    <script>
+        function displayImage(event){
+            document.getElementById("showImg").src =URL.createObjectURL(event.target.files[0]);
+            console.log(event.target.files[0]);
+        }
+    </script>
+
+
+</body>
+
+</html>
